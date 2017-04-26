@@ -4,8 +4,8 @@ Il servizio principale RomaTre fornisce informazioni su aule e professori di un 
 2. **/RomaTre/&lt;dipartimento>/&lt;orario>** restituisce informazioni (casuali) su &lt;dipartimento> (cognome dei professori che insegnano in quel dipartimento) e informazioni (sempre casuali) sulle aule libere per quel &lt;dipartimento> in quello specifico &lt;orario>.
 
 Ad esempio,
-* la richiesta /RomaTre/Lettere potrebbe restituire "I professori di Lettere sono: Rossi, Verdi e Bianchi. Le aule sono: L1, L2, L3".
-* la richiesta /RomaTre/Lettere/12 potrebbe restituire "I professori di Lettere sono: Rossi, Verdi e Bianchi. Le aule libere alle ore 12 sono: L3, L4".
+* la richiesta /RomaTre/Lettere potrebbe restituire "Nel dipartimento di Lettere sono presenti i seguenti professori: Luca, Mario, Matteo. Sono a disposizione degli studenti le seguenti aule: L1, L2, L3".
+* la richiesta /RomaTre/Lettere/12 potrebbe restituire "Nel dipartimento di Lettere sono presenti i seguenti professori: Luca, Mario, Matteo. Le aule libere nell'orario indicato sono: L2, L2".
 
 -------
 
