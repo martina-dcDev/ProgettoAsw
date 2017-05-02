@@ -10,25 +10,25 @@ public class R2Controller {
 
 	@Value("${giudizi.aule}")
 	private String giudiziAule;
-	
+
 	@Value("${giudizi.esercitazioni}")
 	private String giudiziEsercitazioni;
-	
+
 	@Value("${giudizi.insegnamento}")
 	private String giudiziInsegnamento;
-	
+
 	@Value("${giudizi.lezioni}")
 	private String giudiziLezioni;
-	
+
 	@Value("${errore.giudizio}")
 	private String erroreGiudizio;
-	
+
 	@RequestMapping("/")
 	public String getGiudizio(){
 	   int giudizio = (int)(Math.random()*10);
 	   return String.valueOf(giudizio);
 	}
-	
+
 	@RequestMapping("/{indicatore}")
 	public String getGiudizioParziale(@PathVariable String indicatore){
 		String[] giudizioArray;
@@ -47,8 +47,8 @@ public class R2Controller {
 		else{
 			return erroreGiudizio;
 		}
-		int i = (int)(Math.random()*4);
+		int i = (int)(Math.random()*9);
 		String giudizio = giudizioArray[i];
-		return giudizio; 
+		return giudizio;
 	}
 }
