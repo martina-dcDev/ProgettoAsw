@@ -24,23 +24,25 @@ public class RomaTreController {
 	public String getHome() {
 		logger.info("getHome()");
 		return "<h1>Welcome to RomaTre</h1>" +
-			"<p>You can search for RomaTre/dipartimento or RomaTre/dipartimento/indicatore</p>";
+			"<p>You can search for /RomaTre/dipartimento or /RomaTre/dipartimento/indicatore</p>";
 	}
 
 	@RequestMapping("/RomaTre/{dipartimento}")
 	public String getSomeInfo(Map<String, Object> model, @PathVariable String dipartimento) {
-		String answ = "Il capo del dipartimento di " + dipartimento +
+		String answ = "Il capo del dipartimento di " + dipartimento.toLowerCase() +
 				" è: " + this.getCapoDip(dipartimento) +
-				".\nIl voto medio di questo dipartimento è: " + this.getGiudizio(dipartimento) + "/10.";
+				" e il valore medio del giudizio di soddisfazione degli studenti" +
+				" di questo dipartimento è: " + this.getGiudizio(dipartimento) + "/10.";
 		logger.info("getSomeInfo(" + dipartimento + "): " + answ);
 		return answ;
 	}
 
 	@RequestMapping("/RomaTre/{dipartimento}/{indicatore}")
 	public String getFullInfo(Map<String, Object> model, @PathVariable String dipartimento, @PathVariable String indicatore) {
-		String answ = "Il capo del dipartimento di " + dipartimento +
+		String answ = "Il capo del dipartimento di " + dipartimento.toLowerCase() +
 				" è: " + this.getCapoDip(dipartimento) +
-				".\nIl voto riguardo \"" + indicatore + "\" è: " + this.getGiudizio(dipartimento, indicatore) + "/10.";
+				" e il valore medio del giudizio di soddisfazione degli studenti" +
+				" relativo all'indicatore \"" + indicatore.toLowerCase() + "\" di questo dipartimento è: " + this.getGiudizio(dipartimento, indicatore) + "/10.";
 		logger.info("getFullInfo(" + dipartimento + ", " + indicatore + "): " + answ);
 		return answ;
 	}
