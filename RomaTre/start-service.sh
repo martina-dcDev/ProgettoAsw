@@ -1,5 +1,4 @@
 #!/bin/bash
 
-mvn package
-
-java -jar target/roma3-0.0.1.jar
+gradle build
+java -jar ./build/libs/RomaTre-0.0.1.jar

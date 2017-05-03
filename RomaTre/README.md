@@ -1,14 +1,23 @@
 ### RomaTre, servizio principale
-Il servizio principale RomaTre fornisce informazioni su aule e professori di un dipartimento dell’università "RomaTre" basandosi sui servizi R1 e R2, ovvero offre due operazioni:
-1. **/RomaTre/&lt;dipartimento>** restituisce informazioni (casuali) su &lt;dipartimento> (cognome dei professori che insegnano in quel dipartimento), e informazioni (sempre casuali) sulle aule di quel &lt;dipartimento> (nome dell’aula).
-2. **/RomaTre/&lt;dipartimento>/&lt;orario>** restituisce informazioni (casuali) su &lt;dipartimento> (cognome dei professori che insegnano in quel dipartimento) e informazioni (sempre casuali) sulle aule libere per quel &lt;dipartimento> in quello specifico &lt;orario>.
+Il servizio principale RomaTre fornisce informazioni (casuali) sui dipartimenti dell'università.
+In particolare restituisce il nome del capo del dipartimento indicato e il valore medio del giudizio di soddisfazione degli studenti di tale dipartimento(un numero intero compreso tra 0 e 10 ottenuto come valore medio dei giudizi espressi dagli studenti sui seguenti indicatori: Esercitazioni, Aule, Lezioni e Insegnamento. Ciascun giudizio parziale viene sempre espresso da un numero intero compreso tra 0 e 10).
+ In particolare il servizio principale offre due operazioni:
+1. **/RomaTre/&lt;dipartimento>** restituisce il nome del capo del &lt;dipartimento> e il valore medio del giudizio degli studenti riguardo a quel &lt;dipartimento>.
+2. **/RomaTre/&lt;dipartimento>/&lt;indicatore>** restituisce il nome del capo del &lt;dipartimento> e il valore medio dell' &lt;indicatore> relativo a quel &lt;dipartimento>.
 
 Ad esempio,
-* la richiesta /RomaTre/Lettere potrebbe restituire "Nel dipartimento di Lettere sono presenti i seguenti professori: Luca, Mario, Matteo. Sono a disposizione degli studenti le seguenti aule: L1, L2, L3".
-* la richiesta /RomaTre/Lettere/12 potrebbe restituire "Nel dipartimento di Lettere sono presenti i seguenti professori: Luca, Mario, Matteo. Le aule libere nell'orario indicato sono: L2, L2".
+* la richiesta /RomaTre/Ingegneria potrebbe restituire "Il capo del dipartimento di Ingegneria è Rossi M. e il valore medio del giudizio di soddisfazione degli studenti di Ingegneria è 8/10".
+* la richiesta /RomaTre/Ingegneria/Aule potrebbe restituire "Il capo del dipartimento di Ingegneria è Rossi M. e il valore medio del giudizio di soddisfazione degli studenti relativo all'indicatore "Aule" di Ingegneria è 8/10"
 
 ### Esecuzione del servizio
 Il servizio per essere eseguito deve essere prima compilato.
 Lo script "start-service.sh" permette la compilazione e l'esecuzione del servizio.
 
 Il servizio risponde sulla porta 8080 di localhost e necessita che i servizi R1 e R2 siano in esecuzione rispettivamente sulle porte 8081 e 8082 di localhost per poter elaborare le richeiste.
+
+---
+
+###### Tecnologie utilizzate:
+Java, Maven, Spring (Spring Boot, Spring Web MVC)
+
+Nota: Il file di proprietà di Spring è scritto in ".properties"

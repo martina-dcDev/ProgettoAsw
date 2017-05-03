@@ -1,28 +1,37 @@
-# Informazioni su aule e docenti di un’università "RomaTre".
-Il servizio principale RomaTre fornisce informazioni su aule e professori di un dipartimento dell’università "RomaTre", ovvero offre due operazioni:
-1. **/RomaTre/&lt;dipartimento>** restituisce informazioni (casuali) su &lt;dipartimento> (cognome dei professori che insegnano in quel dipartimento), e informazioni (sempre casuali) sulle aule di quel &lt;dipartimento> (nome dell’aula).
-2. **/RomaTre/&lt;dipartimento>/&lt;orario>** restituisce informazioni (casuali) su &lt;dipartimento> (cognome dei professori che insegnano in quel dipartimento) e informazioni (sempre casuali) sulle aule libere per quel &lt;dipartimento> in quello specifico &lt;orario>.
+# Informazioni sui Dipartimenti dell'università "RomaTre".
+Il servizio principale RomaTre fornisce informazioni (casuali) sui dipartimenti dell'università.
+In particolare restituisce il nome del capo del dipartimento indicato e il valore medio del giudizio di soddisfazione degli studenti di tale dipartimento(un numero intero compreso tra 0 e 10 ottenuto come valore medio dei giudizi espressi dagli studenti sui seguenti indicatori: Esercitazioni, Aule, Lezioni e Insegnamento. Ciascun giudizio parziale viene sempre espresso da un numero intero compreso tra 0 e 10).
+ In particolare il servizio principale offre due operazioni:
+1. **/RomaTre/&lt;dipartimento>** restituisce il nome del capo del &lt;dipartimento> e il valore medio del giudizio degli studenti riguardo a quel &lt;dipartimento>.
+2. **/RomaTre/&lt;dipartimento>/&lt;indicatore>** restituisce il nome del capo del &lt;dipartimento> e il valore medio dell' &lt;indicatore> relativo a quel &lt;dipartimento>.
 
 Ad esempio,
-* la richiesta /RomaTre/Lettere potrebbe restituire "Nel dipartimento di Lettere sono presenti i seguenti professori: Luca, Mario, Matteo. Sono a disposizione degli studenti le seguenti aule: L1, L2, L3".
-* la richiesta /RomaTre/Lettere/12 potrebbe restituire "Nel dipartimento di Lettere sono presenti i seguenti professori: Luca, Mario, Matteo. Le aule libere nell'orario indicato sono: L2, L2".
+* la richiesta /RomaTre/Ingegneria potrebbe restituire "Il capo del dipartimento di Ingegneria è Rossi M. e il valore medio del giudizio di soddisfazione degli studenti di Ingegneria è 8/10".
+* la richiesta /RomaTre/Ingegneria/Aule potrebbe restituire "Il capo del dipartimento di Ingegneria è Rossi M. e il valore medio del giudizio di soddisfazione degli studenti relativo all'indicatore "Aule" di Ingegneria è 8/10"
 
 -------
 
 Il servizio RomaTre è implementato come client di due servizi secondari R1 e R2, con le caratteristiche descritte nel seguito:
 
 Il servizio R1 fornisce un’operazione:
-* R1/&lt;dipartimento> restituisce l’elenco dei professori (cognomi casuali. Il numero di professori che vengono mostrati sono in numero prefissato) del &lt;dipartimento> dell’università RomaTre.
+1. **R1/&lt;dipartimento>** restituisce il nome del capo del &lt;dipartimento>
 
-	Ad esempio,
-	la richiesta /R1/Ingegneria potrebbe restituire "Rossi, Verdi, Bianchi".
+Ad esempio,
+* la richiesta /R1/Ingegneria potrebbe restituire "Rossi M.".
 
 Inoltre, il servizio R2 fornisce due operazioni:
-* R2/&lt;dipartimento> restituisce le aule presenti nel &lt;dipartimento> dell’università.
-* R2/&lt;dipartimento>/&lt;orario> restituisce restituisce le aule libere nel &lt;dipartimento> dell'università all'&lt;orario> specificato.
+1. **R2/&lt;dipartimento>** restituisce il valore medio del giudizio degli studenti riguardo a quel &lt;dipartimento>.
+2. **R2/&lt;dipartimento>/&lt;indicatore>** restituisce il valore medio dell' &lt;indicatore> relativo a quel &lt;dipartimento>
 
-	Ad esempio,
-	la richiesta /R2/Ingegneria potrebbe restituire "N1, N2, N3".
-	la richiesta /R2/Ingegneria/12 potrebbe restituire "N1, N2".
+Ad esempio,
+* la richiesta /R2/Ingegneria potrebbe restituire "5".
+* la richiesta /R2/Ingegneria/Aule potrebbe restituire "3".
 
 Il servizio RomaTre risponde al suo client usufruendo dei servizi R1 e R2 e integrando le loro risposte.
+
+-----
+N.B.: è possibile visualizzare una panoramica della valutazione della didattica da parte degli studenti frequentanti al seguente link
+
+http://host.uniroma3.it/uffici/nucleo/archivio/db/relazioni/Relazione_valutazione_didattica_10-11.pdf
+
+Rispetto agli indicatori di valutazione della didattica presentati nel documento abbiamo scelto per semplicità soltanto i 4 menzionati sopra.
