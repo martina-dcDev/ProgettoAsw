@@ -1,4 +1,7 @@
 #!/bin/bash
 
-gradle build
-java -jar ./build/libs/RomaTre-0.0.1.jar
+# Script per avviare il servizio RomaTre
+
+echo Running RomaTre
+
+java -Xms64m -Xmx128m -jar ./build/libs/RomaTre-0.0.1.jar
