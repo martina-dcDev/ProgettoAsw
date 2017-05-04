@@ -1,6 +1,5 @@
 package it.uniroma3.asw.romatre;
 
-import java.util.Map;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -20,15 +19,8 @@ public class RomaTreController {
 	@Value("${romatre.giudizi.uri}")
 	private String giudiziUri;
 
-	@RequestMapping("/")
-	public String getHome() {
-		logger.info("getHome()");
-		return "<h1>Welcome to RomaTre</h1>" +
-			"<p>You can search for /RomaTre/dipartimento or /RomaTre/dipartimento/indicatore</p>";
-	}
-
 	@RequestMapping("/RomaTre/{dipartimento}")
-	public String getSomeInfo(Map<String, Object> model, @PathVariable String dipartimento) {
+	public String getSomeInfo(@PathVariable String dipartimento) {
 		String answ = "Il capo del dipartimento di " + dipartimento.toLowerCase() +
 				" è: " + this.getCapoDip(dipartimento) +
 				" e il valore medio del giudizio di soddisfazione degli studenti" +
@@ -38,7 +30,7 @@ public class RomaTreController {
 	}
 
 	@RequestMapping("/RomaTre/{dipartimento}/{indicatore}")
-	public String getFullInfo(Map<String, Object> model, @PathVariable String dipartimento, @PathVariable String indicatore) {
+	public String getFullInfo(@PathVariable String dipartimento, @PathVariable String indicatore) {
 		String answ = "Il capo del dipartimento di " + dipartimento.toLowerCase() +
 				" è: " + this.getCapoDip(dipartimento) +
 				" e il valore medio del giudizio di soddisfazione degli studenti" +
