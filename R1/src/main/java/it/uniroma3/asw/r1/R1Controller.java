@@ -19,6 +19,7 @@ public class R1Controller {
 	@RequestMapping("/R1/{dipartimento}")
 	public String getDirettore(@PathVariable String dipartimento) {
 		
+		dipartimento = dipartimento.toLowerCase();
 		String valore = "direttori"+"."+dipartimento;
 		String direttori = env.getProperty(valore);
 		String[] direttoriArray = direttori.split(",");
