@@ -11,6 +11,6 @@ Ad esempio,
 
 ### Esecuzione del servizio
 Il servizio per essere eseguito deve essere prima compilato.
-Lo script "start-service.sh" permette la compilazione e l'esecuzione del servizio.
+Lo script "run-RomaTre-service.sh" permette la compilazione e l'esecuzione del servizio.
 
 Il servizio risponde sulla porta 8080 di localhost e necessita che i servizi R1 e R2 siano in esecuzione rispettivamente sulle porte 8081 e 8082 di localhost per poter elaborare le richeiste.
