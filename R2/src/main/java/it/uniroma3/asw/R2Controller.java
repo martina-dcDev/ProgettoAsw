@@ -17,7 +17,12 @@ public class R2Controller {
 	private final Logger logger = Logger.getLogger("it.uniroma3.asw");
 	
 	@RequestMapping("/R2/{dipartimento}")
-	public String getGiudizio(@PathVariable String dipartimento){
+	public String getGiudizio(@PathVariable String dipartimento) throws GiudizioDipartimentoException{
+		
+		
+		if( dipartimento.equals("architettura") ||dipartimento.equals("ingegneria")||dipartimento.equals("economia")||dipartimento.equals("giurisprudenza")){
+			throw new GiudizioDipartimentoException(env.getProperty("errore.giudizio.dipartimento"));	
+		}
 		
 		String giudizioAule = this.recuperaGiudizio(dipartimento, env.getProperty("aule"));
 		logger.info("giudizio aule " + giudizioAule);
@@ -28,7 +33,7 @@ public class R2Controller {
 		String giudizioLezioni = this.recuperaGiudizio(dipartimento, env.getProperty("lezioni"));
 		logger.info("giudizio lezioni " + giudizioLezioni);
 		
-		
+	
 		String mediaGiudizio = calcolaMediaGiudizio(giudizioAule, giudizioEsercitazioni, giudizioInsegnamento, giudizioLezioni);
 		logger.info("media giudizio " + mediaGiudizio);
 		
@@ -36,10 +41,19 @@ public class R2Controller {
 	}
 	
 	@RequestMapping("/R2/{dipartimento}/{indicatore}")
-	public String getGiudizioParziale(@PathVariable String dipartimento, @PathVariable String indicatore){
+	public String getGiudizioParziale(@PathVariable String dipartimento, @PathVariable String indicatore) throws GiudizioDipartimentoException, IndicatoreGiudizioException {
+		
+		
+		if( "architettura".equals(dipartimento) ||"ingegneria".equals(dipartimento)||"economia".equals(dipartimento)||"giurisprudenza".equals(dipartimento)){
+			throw new GiudizioDipartimentoException(env.getProperty("errore.giudizio.dipartimento"));
+			
+		}
+		else if("aule".equals(indicatore) || "esercitazioni".equals(indicatore) || "insegnamento".equals(indicatore)|| "lezioni".equals(indicatore)){
+			throw new IndicatoreGiudizioException(env.getProperty("errore.indicatore.giudizio"));
+		}
 		
 		String giudizioParziale = this.recuperaGiudizio(dipartimento,indicatore);
-		
+		logger.info("giudizio "+indicatore+ ": "+ giudizioParziale);
 		return giudizioParziale;
 	}
 	
@@ -51,7 +65,6 @@ public class R2Controller {
 		int valoreGiudizioLezioni = Integer.parseInt(giudizioLezioni);
 		
 		int mediaGiudizio = (valoreGiudizioAule+valoreGiudizioEsercitazioni+valoreGiudizioInsegnamento+valoreGiudizioLezioni)/4;
-		logger.info("media giudizio " + mediaGiudizio);
 		
 		String giudizio = String.valueOf(mediaGiudizio);
 		return giudizio;
@@ -59,12 +72,11 @@ public class R2Controller {
 	
 	/* Metodo privato che recupera il giudizio sull'indicatore del dipartimento dal file di properties*/
 	private String recuperaGiudizio(String dipartimento,String indicatore){
-		logger.info("dipartimento " + dipartimento);
-		logger.info("indicatore " + indicatore);
+
 		String value = "giudizi."+dipartimento+"."+indicatore;
 		
 		String giudizio = env.getProperty(value);
-		logger.info("giudizio " + giudizio);
+	
 		
 		String[] giudizioArray = giudizio.split(",");
 		
