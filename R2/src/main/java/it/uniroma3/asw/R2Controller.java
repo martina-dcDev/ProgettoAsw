@@ -10,78 +10,71 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class R2Controller {
-	 
+
 	@Autowired
 	Environment env;
-	
-	private final Logger logger = Logger.getLogger("it.uniroma3.asw");
-	
+
+	private final Logger logger = Logger.getLogger("it.uniroma3.asw.r2");
+
 	@RequestMapping("/R2/{dipartimento}")
 	public String getGiudizio(@PathVariable String dipartimento) throws GiudizioDipartimentoException{
+		String[] dipartimenti = env.getProperty("dipartimenti").split(", ");
+		String[] indicatori = env.getProperty("indicatori").split(", ");
 		
-		
-		if( dipartimento.equals("architettura") ||dipartimento.equals("ingegneria")||dipartimento.equals("economia")||dipartimento.equals("giurisprudenza")){
-			throw new GiudizioDipartimentoException(env.getProperty("errore.giudizio.dipartimento"));	
+		dipartimento = dipartimento.toLowerCase();
+
+		boolean trovato = false;
+		for(String dip : dipartimenti){
+			if(dip.equals(dipartimento))
+				trovato = true;
 		}
-		
-		String giudizioAule = this.recuperaGiudizio(dipartimento, env.getProperty("aule"));
-		logger.info("giudizio aule " + giudizioAule);
-		String giudizioEsercitazioni = this.recuperaGiudizio(dipartimento, env.getProperty("esercitazioni"));
-		logger.info("giudizio esercitazioni " + giudizioEsercitazioni);
-		String giudizioInsegnamento = this.recuperaGiudizio(dipartimento, env.getProperty("insegnamento"));
-		logger.info("giudizio insegnamento " + giudizioInsegnamento);
-		String giudizioLezioni = this.recuperaGiudizio(dipartimento, env.getProperty("lezioni"));
-		logger.info("giudizio lezioni " + giudizioLezioni);
-		
-	
-		String mediaGiudizio = calcolaMediaGiudizio(giudizioAule, giudizioEsercitazioni, giudizioInsegnamento, giudizioLezioni);
-		logger.info("media giudizio " + mediaGiudizio);
-		
+		if(!trovato) throw new GiudizioDipartimentoException(env.getProperty("errore.giudizio.dipartimento"));
+
+		int somma = 0;
+		for (String indicatore : indicatori){
+			int value = Integer.parseInt(this.recuperaGiudizio(dipartimento, indicatore));
+			somma += value;
+		}
+
+		String mediaGiudizio = String.valueOf(((int)(somma/indicatori.length)));
+		logger.info("getGiudizio(" + dipartimento + "): " + mediaGiudizio);
 		return mediaGiudizio;
 	}
-	
+
 	@RequestMapping("/R2/{dipartimento}/{indicatore}")
 	public String getGiudizioParziale(@PathVariable String dipartimento, @PathVariable String indicatore) throws GiudizioDipartimentoException, IndicatoreGiudizioException {
+		String[] dipartimenti = env.getProperty("dipartimenti").split(", ");
+		String[] indicatori = env.getProperty("indicatori").split(", ");
+
+		dipartimento = dipartimento.toLowerCase();
+		indicatore = indicatore.toLowerCase();
 		
-		
-		if( "architettura".equals(dipartimento) ||"ingegneria".equals(dipartimento)||"economia".equals(dipartimento)||"giurisprudenza".equals(dipartimento)){
-			throw new GiudizioDipartimentoException(env.getProperty("errore.giudizio.dipartimento"));
-			
+		boolean trovatoDip = false;
+		boolean trovatoInd = false;
+		for(String dip : dipartimenti){
+			if(dip.equals(dipartimento))
+				trovatoDip = true;
 		}
-		else if("aule".equals(indicatore) || "esercitazioni".equals(indicatore) || "insegnamento".equals(indicatore)|| "lezioni".equals(indicatore)){
-			throw new IndicatoreGiudizioException(env.getProperty("errore.indicatore.giudizio"));
+		if(!trovatoDip) throw new GiudizioDipartimentoException(env.getProperty("errore.giudizio.dipartimento"));
+		for(String ind : indicatori){
+			if(ind.equals(indicatore))
+				trovatoInd = true;
 		}
-		
-		String giudizioParziale = this.recuperaGiudizio(dipartimento,indicatore);
-		logger.info("giudizio "+indicatore+ ": "+ giudizioParziale);
+		if(!trovatoInd)throw new GiudizioDipartimentoException(env.getProperty("errore.indicatore.giudizio"));
+
+		String giudizioParziale = this.recuperaGiudizio(dipartimento, indicatore);
+		logger.info("getGiudizioParziale(" + dipartimento + ", " + indicatore + "): " + giudizioParziale);
 		return giudizioParziale;
 	}
-	
-	/* Metodo privato che calcola la media dei valori dei giudizi su tutti gli indicatori di un dato dipartimento*/
-	private String calcolaMediaGiudizio(String giudizioAule, String giudizioEsercitazioni, String giudizioInsegnamento, String giudizioLezioni){
-		int valoreGiudizioAule = Integer.parseInt(giudizioAule);
-		int valoreGiudizioEsercitazioni = Integer.parseInt(giudizioEsercitazioni);
-		int valoreGiudizioInsegnamento = Integer.parseInt(giudizioInsegnamento);
-		int valoreGiudizioLezioni = Integer.parseInt(giudizioLezioni);
-		
-		int mediaGiudizio = (valoreGiudizioAule+valoreGiudizioEsercitazioni+valoreGiudizioInsegnamento+valoreGiudizioLezioni)/4;
-		
-		String giudizio = String.valueOf(mediaGiudizio);
-		return giudizio;
-	}
-	
+
 	/* Metodo privato che recupera il giudizio sull'indicatore del dipartimento dal file di properties*/
 	private String recuperaGiudizio(String dipartimento,String indicatore){
 
-		String value = "giudizi."+dipartimento+"."+indicatore;
-		
-		String giudizio = env.getProperty(value);
-	
-		
+		String giudizio = env.getProperty("giudizi." + dipartimento + "." + indicatore);
 		String[] giudizioArray = giudizio.split(",");
-		
-		int i = (int)(Math.random()*(giudizioArray.length-1));		
-		String valoreGiudizio = giudizioArray[i];
-		return valoreGiudizio; 
+
+		int i = (int)(Math.random()*(giudizioArray.length-1));
+
+		return giudizioArray[i];
 	}
 }

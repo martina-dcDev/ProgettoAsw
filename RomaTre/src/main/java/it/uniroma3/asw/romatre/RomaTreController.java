@@ -13,30 +13,40 @@ public class RomaTreController {
 
 	private final Logger logger = Logger.getLogger("it.uniroma3.asw.romatre");
 
-	@Value("${romatre.capodipartimento.uri}")
-	private String capodipartimentoUri;
+	@Value("${romatre.direttoredipartimento.uri}")
+	private String direttoredipartimentoUri;
 
 	@Value("${romatre.giudizi.uri}")
 	private String giudiziUri;
 
 	@RequestMapping("/RomaTre/{dipartimento}")
 	public String getSomeInfo(@PathVariable String dipartimento) {
-		String answ = "Il capo del dipartimento di " + dipartimento.toLowerCase() +
-				" Ã¨: " + this.getCapoDip(dipartimento) +
+		try {
+			String answ = "Il direttore del dipartimento di " + dipartimento.toLowerCase() +
+				" è: " + this.getCapoDip(dipartimento) +
 				" e il valore medio del giudizio di soddisfazione degli studenti" +
-				" di questo dipartimento Ã¨: " + this.getGiudizio(dipartimento) + "/10.";
-		logger.info("getSomeInfo(" + dipartimento + "): " + answ);
-		return answ;
+				" di questo dipartimento è: " + this.getGiudizio(dipartimento) + "/10.";
+			logger.info("getSomeInfo(" + dipartimento + "): " + answ);
+
+			return answ;
+		} catch(Exception e){
+			return e.getMessage();
+		}
 	}
 
 	@RequestMapping("/RomaTre/{dipartimento}/{indicatore}")
 	public String getFullInfo(@PathVariable String dipartimento, @PathVariable String indicatore) {
-		String answ = "Il capo del dipartimento di " + dipartimento.toLowerCase() +
-				" Ã¨: " + this.getCapoDip(dipartimento) +
+		try {
+			String answ = "Il direttore del dipartimento di " + dipartimento.toLowerCase() +
+				" è: " + this.getCapoDip(dipartimento) +
 				" e il valore medio del giudizio di soddisfazione degli studenti" +
-				" relativo all'indicatore \"" + indicatore.toLowerCase() + "\" di questo dipartimento Ã¨: " + this.getGiudizio(dipartimento, indicatore) + "/10.";
-		logger.info("getFullInfo(" + dipartimento + ", " + indicatore + "): " + answ);
-		return answ;
+				" relativo all'indicatore \"" + indicatore.toLowerCase() + "\" di questo dipartimento è: " + this.getGiudizio(dipartimento, indicatore) + "/10.";
+			logger.info("getFullInfo(" + dipartimento + ", " + indicatore + "): " + answ);
+			
+			return answ;
+		} catch(Exception e){
+			return e.getMessage();
+		}
 	}
 
 	private String getAnsw(String uri) {
@@ -44,7 +54,7 @@ public class RomaTreController {
 	}
 
 	private String getCapoDip(String dipartimento) {
-		return this.getAnsw(capodipartimentoUri + "/" + dipartimento);
+		return this.getAnsw(direttoredipartimentoUri + "/" + dipartimento);
 	}
 
 	private String getGiudizio(String dipartimento) {
