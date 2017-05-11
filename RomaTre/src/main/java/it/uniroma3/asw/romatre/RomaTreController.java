@@ -30,9 +30,9 @@ public class RomaTreController {
 		else if (rispostErrata(giudizio)) return giudizio;
 		
 		String answ = "Il direttore del dipartimento di " + dipartimento +
-			" è: " + capoDip +
+			" e': " + capoDip +
 			" e il valore medio del giudizio di soddisfazione degli studenti" +
-			" di questo dipartimento è: " + giudizio + "/10.";
+			" di questo dipartimento e': " + giudizio + "/10.";
 		
 		logger.info("getSomeInfo(" + dipartimento + "): " + answ);
 		return answ;
@@ -50,9 +50,9 @@ public class RomaTreController {
 		else if (rispostErrata(giudizio)) return giudizio;		
 		
 		String answ = "Il direttore del dipartimento di " + dipartimento +
-			" è: " + capoDip +
+			" e': " + capoDip +
 			" e il valore medio del giudizio di soddisfazione degli studenti" +
-			" relativo all'indicatore \"" + indicatore + "\" di questo dipartimento è: " + giudizio + "/10.";
+			" relativo all'indicatore \"" + indicatore + "\" di questo dipartimento e': " + giudizio + "/10.";
 		
 		logger.info("getFullInfo(" + dipartimento + ", " + indicatore + "): " + answ);
 		return answ;

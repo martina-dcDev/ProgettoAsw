@@ -1,4 +1,4 @@
-package it.uniroma3.asw;
+package it.uniroma3.asw.r2;
 
 import java.util.logging.Logger;
 
@@ -30,7 +30,6 @@ public class R2Controller {
 				trovato = true;
 		}
 		if(!trovato){
-			//throw new GiudizioDipartimentoException(env.getProperty("errore.giudizio.dipartimento"));
 			return env.getProperty("errore.giudizio.dipartimento");
 		}
 		int somma = 0;
@@ -45,7 +44,7 @@ public class R2Controller {
 	}
 
 	@RequestMapping("/R2/{dipartimento}/{indicatore}")
-	public String getGiudizioParziale(@PathVariable String dipartimento, @PathVariable String indicatore) throws GiudizioDipartimentoException, IndicatoreGiudizioException {
+	public String getGiudizioParziale(@PathVariable String dipartimento, @PathVariable String indicatore){
 		String[] dipartimenti = env.getProperty("dipartimenti").split(", ");
 		String[] indicatori = env.getProperty("indicatori").split(", ");
 
@@ -60,7 +59,6 @@ public class R2Controller {
 			}
 		}
 		if(!trovatoDip){
-			//throw new GiudizioDipartimentoException(env.getProperty("errore.giudizio.dipartimento"));
 			return env.getProperty("errore.giudizio.dipartimento");
 		}
 		for(String ind : indicatori){
@@ -69,7 +67,6 @@ public class R2Controller {
 			}	
 		}
 		if(!trovatoInd){
-			//throw new IndicatoreGiudizioException(env.getProperty("errore.indicatore.giudizio"));
 			return env.getProperty("errore.indicatore.giudizio");
 		}
 		String giudizioParziale = this.recuperaGiudizio(dipartimento, indicatore);

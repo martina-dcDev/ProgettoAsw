@@ -1,6 +1,6 @@
 ### RomaTre, servizio principale
 Il servizio principale RomaTre fornisce informazioni (casuali) sui dipartimenti dell'università.
-In particolare restituisce il nome del direttore del dipartimento indicato e il valore medio del giudizio di soddisfazione degli studenti di tale dipartimento(un numero intero compreso tra 0 e 10 ottenuto come valore medio dei giudizi espressi dagli studenti sui seguenti indicatori: Esercitazioni, Aule, Lezioni e Insegnamento. Ciascun giudizio parziale viene sempre espresso da un numero intero compreso tra 0 e 10).
+In particolare restituisce il nome del direttore del dipartimento indicato e il valore medio del giudizio di soddisfazione degli studenti di tale dipartimento (un numero intero compreso tra 0 e 10 ottenuto come valore medio dei giudizi espressi dagli studenti sui seguenti indicatori: Esercitazioni, Aule, Lezioni e Insegnamento. Ciascun giudizio parziale viene sempre espresso da un numero intero compreso tra 0 e 10).
  In particolare il servizio principale offre due operazioni:
 1. **/RomaTre/&lt;dipartimento>** restituisce il nome del direttore del &lt;dipartimento> e il valore medio del giudizio degli studenti riguardo a quel &lt;dipartimento>.
 2. **/RomaTre/&lt;dipartimento>/&lt;indicatore>** restituisce il nome del direttore del &lt;dipartimento> e il valore medio dell' &lt;indicatore> relativo a quel &lt;dipartimento>.

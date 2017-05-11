@@ -26,7 +26,6 @@ public class R1Controller {
 			if(dip.equals(dipartimento))
 				trovato = true;
 		}
-		// if(!trovato) throw new DipartimentoException(env.getProperty("errore.dipartimento"));
 		if(!trovato) {
 			String errore = env.getProperty("errore.dipartimento");  
 			logger.info("getDirettore(" + dipartimento + "): " + errore);
