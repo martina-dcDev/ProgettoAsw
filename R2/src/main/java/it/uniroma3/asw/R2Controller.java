@@ -13,11 +13,12 @@ public class R2Controller {
 
 	@Autowired
 	Environment env;
+	
 
 	private final Logger logger = Logger.getLogger("it.uniroma3.asw.r2");
 
 	@RequestMapping("/R2/{dipartimento}")
-	public String getGiudizio(@PathVariable String dipartimento) throws GiudizioDipartimentoException{
+	public String getGiudizio(@PathVariable String dipartimento){
 		String[] dipartimenti = env.getProperty("dipartimenti").split(", ");
 		String[] indicatori = env.getProperty("indicatori").split(", ");
 		
@@ -28,8 +29,10 @@ public class R2Controller {
 			if(dip.equals(dipartimento))
 				trovato = true;
 		}
-		if(!trovato) throw new GiudizioDipartimentoException(env.getProperty("errore.giudizio.dipartimento"));
-
+		if(!trovato){
+			//throw new GiudizioDipartimentoException(env.getProperty("errore.giudizio.dipartimento"));
+			return env.getProperty("errore.giudizio.dipartimento");
+		}
 		int somma = 0;
 		for (String indicatore : indicatori){
 			int value = Integer.parseInt(this.recuperaGiudizio(dipartimento, indicatore));
@@ -52,16 +55,23 @@ public class R2Controller {
 		boolean trovatoDip = false;
 		boolean trovatoInd = false;
 		for(String dip : dipartimenti){
-			if(dip.equals(dipartimento))
+			if(dip.equals(dipartimento)){
 				trovatoDip = true;
+			}
 		}
-		if(!trovatoDip) throw new GiudizioDipartimentoException(env.getProperty("errore.giudizio.dipartimento"));
+		if(!trovatoDip){
+			//throw new GiudizioDipartimentoException(env.getProperty("errore.giudizio.dipartimento"));
+			return env.getProperty("errore.giudizio.dipartimento");
+		}
 		for(String ind : indicatori){
-			if(ind.equals(indicatore))
+			if(ind.equals(indicatore)){
 				trovatoInd = true;
+			}	
 		}
-		if(!trovatoInd)throw new GiudizioDipartimentoException(env.getProperty("errore.indicatore.giudizio"));
-
+		if(!trovatoInd){
+			//throw new IndicatoreGiudizioException(env.getProperty("errore.indicatore.giudizio"));
+			return env.getProperty("errore.indicatore.giudizio");
+		}
 		String giudizioParziale = this.recuperaGiudizio(dipartimento, indicatore);
 		logger.info("getGiudizioParziale(" + dipartimento + ", " + indicatore + "): " + giudizioParziale);
 		return giudizioParziale;
