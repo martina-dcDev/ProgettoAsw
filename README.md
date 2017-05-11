@@ -1,3 +1,8 @@
+# Membri del gruppo
+* Martina Della Corte
+* Lorenzo Mignone
+* Viviana Pilosio
+
 # Informazioni sui dipartimenti dell'università "RomaTre".
 Il servizio principale RomaTre fornisce informazioni (casuali) sui dipartimenti dell'università.
 In particolare restituisce il nome del capo del dipartimento indicato e il valore medio del giudizio di soddisfazione degli studenti di tale dipartimento(un numero intero compreso tra 0 e 10 ottenuto come valore medio dei giudizi espressi dagli studenti sui seguenti indicatori: Esercitazioni, Aule, Lezioni e Insegnamento. Ciascun giudizio parziale viene sempre espresso da un numero intero compreso tra 0 e 10).
