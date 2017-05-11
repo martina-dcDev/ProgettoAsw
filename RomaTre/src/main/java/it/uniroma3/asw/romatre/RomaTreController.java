@@ -21,32 +21,45 @@ public class RomaTreController {
 
 	@RequestMapping("/RomaTre/{dipartimento}")
 	public String getSomeInfo(@PathVariable String dipartimento) {
-		try {
-			String answ = "Il direttore del dipartimento di " + dipartimento.toLowerCase() +
-				" è: " + this.getCapoDip(dipartimento) +
-				" e il valore medio del giudizio di soddisfazione degli studenti" +
-				" di questo dipartimento è: " + this.getGiudizio(dipartimento) + "/10.";
-			logger.info("getSomeInfo(" + dipartimento + "): " + answ);
-
-			return answ;
-		} catch(Exception e){
-			return e.getMessage();
-		}
+		dipartimento = dipartimento.toLowerCase();
+		
+		String capoDip = this.getCapoDip(dipartimento);
+		String giudizio = this.getGiudizio(dipartimento);
+		
+		if(rispostErrata(capoDip)) return capoDip;
+		else if (rispostErrata(giudizio)) return giudizio;
+		
+		String answ = "Il direttore del dipartimento di " + dipartimento +
+			" è: " + capoDip +
+			" e il valore medio del giudizio di soddisfazione degli studenti" +
+			" di questo dipartimento è: " + giudizio + "/10.";
+		
+		logger.info("getSomeInfo(" + dipartimento + "): " + answ);
+		return answ;
 	}
 
 	@RequestMapping("/RomaTre/{dipartimento}/{indicatore}")
 	public String getFullInfo(@PathVariable String dipartimento, @PathVariable String indicatore) {
-		try {
-			String answ = "Il direttore del dipartimento di " + dipartimento.toLowerCase() +
-				" è: " + this.getCapoDip(dipartimento) +
-				" e il valore medio del giudizio di soddisfazione degli studenti" +
-				" relativo all'indicatore \"" + indicatore.toLowerCase() + "\" di questo dipartimento è: " + this.getGiudizio(dipartimento, indicatore) + "/10.";
-			logger.info("getFullInfo(" + dipartimento + ", " + indicatore + "): " + answ);
-			
-			return answ;
-		} catch(Exception e){
-			return e.getMessage();
-		}
+		dipartimento = dipartimento.toLowerCase();
+		indicatore = indicatore.toLowerCase();
+		
+		String capoDip = this.getCapoDip(dipartimento);
+		String giudizio = this.getGiudizio(dipartimento, indicatore);
+		
+		if(rispostErrata(capoDip)) return capoDip;
+		else if (rispostErrata(giudizio)) return giudizio;		
+		
+		String answ = "Il direttore del dipartimento di " + dipartimento +
+			" è: " + capoDip +
+			" e il valore medio del giudizio di soddisfazione degli studenti" +
+			" relativo all'indicatore \"" + indicatore + "\" di questo dipartimento è: " + giudizio + "/10.";
+		
+		logger.info("getFullInfo(" + dipartimento + ", " + indicatore + "): " + answ);
+		return answ;
+	}
+	
+	private boolean rispostErrata(String risposta){
+		return risposta.contains("{");
 	}
 
 	private String getAnsw(String uri) {

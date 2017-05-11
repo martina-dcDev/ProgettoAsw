@@ -17,7 +17,7 @@ public class R1Controller {
 	private final Logger logger = Logger.getLogger("it.uniroma3.asw.r1");
 
 	@RequestMapping("/R1/{dipartimento}")
-	public String getDirettore(@PathVariable String dipartimento) throws DipartimentoException {
+	public String getDirettore(@PathVariable String dipartimento){
 		dipartimento = dipartimento.toLowerCase();
 		String[] dipartimenti = env.getProperty("dipartimenti").split(", ");
 
@@ -26,7 +26,13 @@ public class R1Controller {
 			if(dip.equals(dipartimento))
 				trovato = true;
 		}
-		if(!trovato) throw new DipartimentoException(env.getProperty("errore.dipartimento"));
+		// if(!trovato) throw new DipartimentoException(env.getProperty("errore.dipartimento"));
+		if(!trovato) {
+			String errore = env.getProperty("errore.dipartimento");  
+			logger.info("getDirettore(" + dipartimento + "): " + errore);
+			return errore;
+		}
+		/* ---------------- */
 
 		String direttori = env.getProperty("direttori." + dipartimento);
 		String[] direttoriArray = direttori.split(", ");
