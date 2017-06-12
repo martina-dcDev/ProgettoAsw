@@ -4,6 +4,7 @@
 /gradle/
 gradlew.bat
 gradlew
+.vscode/
 
 ### STS ###
 .apt_generated
