@@ -12,11 +12,8 @@ public class RomaTreController {
 
 	private final Logger logger = Logger.getLogger("it.uniroma3.asw.romatre");
 
-	@Autowired
-	private DirettoreDipartimentoService direttoredipartimentoService;
-
-	@Autowired
-	private GiudiziService giudiziService;
+	@Autowired private DirettoreDipartimentoService direttoredipartimentoService;
+	@Autowired private GiudiziService giudiziService;
 
 	@RequestMapping("/RomaTre/{dipartimento}")
 	public String getSomeInfo(@PathVariable String dipartimento) {
