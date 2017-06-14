@@ -5,8 +5,10 @@ import org.springframework.stereotype.Service;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
+import it.uniroma3.asw.romatre.clients.GiudizioClient;
+
 @Service
-public class GiudizioServiceImpl implements GiudiziService {
+public class GiudizioService {
 
 	@Autowired
 	private GiudizioClient giudizioClient;
@@ -23,11 +25,11 @@ public class GiudizioServiceImpl implements GiudiziService {
 	
 	/* ------------ FALLBACK methods ------------ */ 
 	public String getFallbackGiudDep(){
-		return "{err}";
+		return "{error on get giudizio (dipendenti)}";
 	}
 	
 	public String getFallbackGiudDepInd(){
-		return "{err}";
+		return "{err on get giudizio (dipendenti, indicatore)}";
 	}
 
 }

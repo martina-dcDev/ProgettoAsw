@@ -1,12 +1,14 @@
-package it.uniroma3.asw.romatre;
+package it.uniroma3.asw.romatre.clients;
 
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import feign.Param;
+
 @FeignClient("direttore")
 public interface DirettoreDipartimentoClient {
 	
-	@RequestMapping(value="/", method=RequestMethod.GET)
-	public String getDirettore(String dipartimento);
+	@RequestMapping(value="/R1/{dipartimento}", method=RequestMethod.GET)
+	public String getDirettore(@Param("dipartimento") String dipartimento);
 }

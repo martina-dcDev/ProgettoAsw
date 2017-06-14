@@ -13,21 +13,21 @@ public class RomaTreController {
 	private final Logger logger = Logger.getLogger("it.uniroma3.asw.romatre");
 
 	@Autowired private DirettoreDipartimentoService direttoredipartimentoService;
-	@Autowired private GiudiziService giudiziService;
+	@Autowired private GiudizioService giudizioService;
 
 	@RequestMapping("/RomaTre/{dipartimento}")
 	public String getSomeInfo(@PathVariable String dipartimento) {
 		dipartimento = dipartimento.toLowerCase();
 
-		String capoDip = this.direttoredipartimentoService.getCapoDip(dipartimento);
-		String giudizio = this.giudiziService.getGiudizio(dipartimento);
+		String direttoreDip = this.direttoredipartimentoService.getDirettoreDip(dipartimento);
+		String giudizio = this.giudizioService.getGiudizio(dipartimento);
 
-		if (containsError(capoDip))
-			return capoDip;
+		if (containsError(direttoreDip))
+			return direttoreDip;
 		else if (containsError(giudizio))
 			return giudizio;
 
-		String answ = "Il direttore del dipartimento di " + dipartimento + " e': " + capoDip
+		String answ = "Il direttore del dipartimento di " + dipartimento + " e': " + direttoreDip
 				+ " e il valore medio del giudizio di soddisfazione degli studenti" + " di questo dipartimento e': "
 				+ giudizio + "/10.";
 
@@ -40,15 +40,15 @@ public class RomaTreController {
 		dipartimento = dipartimento.toLowerCase();
 		indicatore = indicatore.toLowerCase();
 
-		String capoDip = this.direttoredipartimentoService.getCapoDip(dipartimento);
-		String giudizio = this.giudiziService.getGiudizio(dipartimento, indicatore);
+		String direttoreDip = this.direttoredipartimentoService.getDirettoreDip(dipartimento);
+		String giudizio = this.giudizioService.getGiudizio(dipartimento, indicatore);
 
-		if (containsError(capoDip))
-			return capoDip;
+		if (containsError(direttoreDip))
+			return direttoreDip;
 		else if (containsError(giudizio))
 			return giudizio;
 
-		String answ = "Il direttore del dipartimento di " + dipartimento + " e': " + capoDip
+		String answ = "Il direttore del dipartimento di " + dipartimento + " e': " + direttoreDip
 				+ " e il valore medio del giudizio di soddisfazione degli studenti" + " relativo all'indicatore \""
 				+ indicatore + "\" di questo dipartimento e': " + giudizio + "/10.";
 

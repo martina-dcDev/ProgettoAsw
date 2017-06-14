@@ -10,7 +10,7 @@ import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 @EnableDiscoveryClient
 @EnableFeignClients
 @EnableHystrix
-// @EnableZuulProxy // Rimuoverlo consente di esporlo su una porta casuale => Posso averne istanze replicate (CREDO)
+// @EnableZuulProxy // Rimuovere questa annotazione consente di esporre il servizio su una porta casuale => Posso averne istanze replicate (CREDO)
 public class RomaTreApplication {
 
 	public static void main(String[] args) {
