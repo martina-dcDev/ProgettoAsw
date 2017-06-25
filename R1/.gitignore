@@ -1,6 +1,8 @@
 .gradle
 /build/
 /bin/
+gradlew.bat
+gradlew
 
 ### STS ###
 .apt_generated
