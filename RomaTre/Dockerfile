@@ -1,6 +1,6 @@
 FROM frolvlad/alpine-oraclejdk8 
 
-ADD build/libs/romatre-0.0.1.jar romatre.jar
+ADD build/libs/romatre-0.0.1-SNAPSHOT.jar romatre.jar
 
 EXPOSE 8080
 

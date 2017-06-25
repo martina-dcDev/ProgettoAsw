@@ -14,3 +14,6 @@ Il servizio può essere avviato in un container Docker.
 L'individuazione dei servizi di R1 e R2 è effettuata da Eureka, mentre l'API gateway è fornito da Zuul.
 Per questo è necessario che sia i servizi R1 e R2  che i servizi Eureka e Zuul siano in esecuzione in container Docker separati.
 L'orchestrazione è effettuata da Docker Swarm.
+
+### Esecuzione del servizio
+Per l'esecuzione del servizio e dell'applicazione in generale sono stati forniti alcuni script con estensione .sh.

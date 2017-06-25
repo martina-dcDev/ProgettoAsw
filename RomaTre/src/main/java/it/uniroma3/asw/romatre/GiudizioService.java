@@ -20,7 +20,7 @@ public class GiudizioService {
 
 	@HystrixCommand(fallbackMethod="getFallbackGiudDepInd")
 	public String getGiudizio(String dipartimento, String indicatore) {
-		return this.giudizioClient.getGiudizio(dipartimento, indicatore);
+		return this.giudizioClient.getGiudizioParziale(dipartimento, indicatore);
 	}
 	
 	/* ------------ FALLBACK methods ------------ */ 

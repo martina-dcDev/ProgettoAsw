@@ -1,11 +1,13 @@
 package it.uniroma3.asw.romatre;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 import it.uniroma3.asw.romatre.clients.DirettoreDipartimentoClient;
 
+@Service
 public class DirettoreDipartimentoService {
 
 	@Autowired
@@ -17,7 +19,7 @@ public class DirettoreDipartimentoService {
 	}
 	
 	/* ------------ FALLBACK methods ------------ */ 
-	public String getFallbackGiudDep(){
+	public String getFallbackDipartimento(){
 		return "{err on get direttore (dipartimento)}";
 	}
 
