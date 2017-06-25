@@ -14,8 +14,11 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 
+jar {
+	baseName = 'R1'
+	version = '0.0.1-SNAPSHOT'
+}
 
-version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
 
@@ -27,4 +30,6 @@ repositories {
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+	compile('org.springframework.cloud:spring-cloud-starter-eureka')
+	compile('org.springframework.cloud:spring-cloud-starter')
 }
