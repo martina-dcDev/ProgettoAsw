@@ -1,7 +1,3 @@
-########################################################
-# Dockerfile per l'applicazione sentence / eureka server 
-########################################################
-
 FROM frolvlad/alpine-oraclejdk8 
 
 ADD build/libs/eureka-server-0.0.1-SNAPSHOT.jar eureka-server.jar
