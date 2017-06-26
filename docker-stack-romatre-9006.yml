@@ -1,0 +1,46 @@
+version: '3'
+services:
+  eureka-9006:
+    image: swarm.inf.uniroma3.it:5000/eureka-img-9006
+#    container_name: eureka
+#    ports:
+#    - "8761:8761"
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+  r1-9006:
+    image: swarm.inf.uniroma3.it:5000/r1-img-9006
+#    container_name: r1
+    depends_on:
+    - "eureka"
+    deploy:
+      mode: replicated
+      replicas: 1    
+  r2-9006:
+    image: swarm.inf.uniroma3.it:5000/r2-img-9006
+#    container_name: r2
+    depends_on:
+    - "eureka"
+    deploy:
+      mode: replicated
+      replicas: 1    
+  romatre-9006:
+    image: swarm.inf.uniroma3.it:5000/romatre-img-9006
+#    container_name: romatre
+    depends_on:
+    - "eureka"
+    deploy:
+      mode: replicated
+      replicas: 2    
+  zuul-9006:
+    image: swarm.inf.uniroma3.it:5000/zuul-img-9006
+#    container_name: zuul
+    depends_on:
+    - "eureka"
+    ports:
+    - "9006:8080"
+
+
+
+
+
