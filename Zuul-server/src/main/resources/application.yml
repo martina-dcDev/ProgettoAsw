@@ -4,7 +4,7 @@ spring:
   application: 
     name: zuul
 server:
-  port: 9006
+  port: 8080
 eureka: 
   client: 
     serviceUrl: 
@@ -12,5 +12,5 @@ eureka:
       
 # leave eureka.instance.leaseRenewalIntervalInSeconds unchanged in production
 # just here to provide quicker updates to Eureka for demos
-instance: 
-  leaseRenewalIntervalInSeconds: 10
+  instance: 
+    leaseRenewalIntervalInSeconds: 10
