@@ -46,4 +46,4 @@ Ad esempio,
 * la richiesta /R2/Ingegneria potrebbe restituire "5".
 * la richiesta /R2/Ingegneria/Aule potrebbe restituire "3".
 
-Il servizio RomaTre risponde al suo client usufruendo dei servizi R1 e R2 e integrando le loro risposte. Per usufruire di R1 ed R2, RomaTre si avvale del servizio di service discovery offerto da Eureka-server presso il quale R1 ed R2 sono registrati. Inoltre viene utilizzato Zuul per fornire un punto di accesso unificato all'intera applicazione.
+Il servizio RomaTre risponde al suo client usufruendo dei servizi R1 e R2 e integrando le loro risposte. Per usufruire di R1 ed R2, RomaTre si avvale del servizio di service discovery offerto da Eureka presso il quale R1 ed R2 sono registrati. Inoltre viene utilizzato Zuul per fornire un punto di accesso unificato all'intera applicazione.
