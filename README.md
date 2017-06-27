@@ -12,7 +12,7 @@ e gli script per il suo rilascio sullo swarm docker **swarm.inf.uniroma3.it**.
 # Premessa
 Copiare nella cartella *swarm.inf.uniroma3.it/resources/certs* i certificati. 
 
-# L'applicazione romatre-9006 - descrizione
+# L'applicazione romatre-9006 : descrizione
 Il servizio principale RomaTre fornisce informazioni (casuali) sui dipartimenti dell'università.
 In particolare restituisce il nome del capo del dipartimento indicato e il valore medio del giudizio di soddisfazione degli studenti di tale dipartimento (un numero intero compreso tra 0 e 10 ottenuto come valore medio dei giudizi espressi dagli studenti sui seguenti indicatori: esercitazioni, aule, lezioni e insegnamento. Ciascun giudizio parziale viene sempre espresso da un numero intero compreso tra 0 e 10).
 
