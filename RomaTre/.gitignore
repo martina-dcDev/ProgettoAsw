@@ -5,6 +5,7 @@
 gradlew.bat
 gradlew
 .vscode/
+cleanfolder.sh
 
 ### STS ###
 .apt_generated

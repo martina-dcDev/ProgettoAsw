@@ -1,6 +1,7 @@
 .gradle
 /build/
 !gradle/wrapper/gradle-wrapper.jar
+cleanfolder.sh
 
 ### STS ###
 .apt_generated
