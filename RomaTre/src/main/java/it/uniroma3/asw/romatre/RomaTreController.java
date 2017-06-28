@@ -15,7 +15,7 @@ public class RomaTreController {
 	@Autowired private DirettoreDipartimentoService direttoredipartimentoService;
 	@Autowired private GiudizioService giudizioService;
 
-	@RequestMapping("/RomaTre/{dipartimento}")
+	@RequestMapping("/{dipartimento}")
 	public String getSomeInfo(@PathVariable String dipartimento) {
 		dipartimento = dipartimento.toLowerCase();
 
@@ -35,7 +35,7 @@ public class RomaTreController {
 		return answ;
 	}
 
-	@RequestMapping("/RomaTre/{dipartimento}/{indicatore}")
+	@RequestMapping("/{dipartimento}/{indicatore}")
 	public String getFullInfo(@PathVariable String dipartimento, @PathVariable String indicatore) {
 		dipartimento = dipartimento.toLowerCase();
 		indicatore = indicatore.toLowerCase();

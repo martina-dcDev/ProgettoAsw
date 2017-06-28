@@ -16,7 +16,7 @@ public class R2Controller {
 	
 	private final Logger logger = Logger.getLogger("it.uniroma3.asw.r2");
 
-	@RequestMapping("/R2/{dipartimento}")
+	@RequestMapping("/{dipartimento}")
 	public String getGiudizio(@PathVariable String dipartimento){
 		String[] dipartimenti = env.getProperty("dipartimenti").split(", ");
 		String[] indicatori = env.getProperty("indicatori").split(", ");
@@ -42,7 +42,7 @@ public class R2Controller {
 		return mediaGiudizio;
 	}
 
-	@RequestMapping("/R2/{dipartimento}/{indicatore}")
+	@RequestMapping("/{dipartimento}/{indicatore}")
 	public String getGiudizioParziale(@PathVariable String dipartimento, @PathVariable String indicatore){
 		String[] dipartimenti = env.getProperty("dipartimenti").split(", ");
 		String[] indicatori = env.getProperty("indicatori").split(", ");

@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @FeignClient("r1")
 public interface DirettoreDipartimentoClient {
 	
-	@RequestMapping(value="/R1/{dipartimento}", method=RequestMethod.GET)
+	@RequestMapping(value="/{dipartimento}", method=RequestMethod.GET)
 	public String getDirettore(@PathVariable("dipartimento") String dipartimento);
 }
