@@ -24,12 +24,12 @@ public class GiudizioService {
 	}
 	
 	/* ------------ FALLBACK methods ------------ */ 
-	public String getFallbackGiudDep(){
-		return "{error on get giudizio (dipendenti)}";
+	public String getFallbackGiudDep(String dipartimento){
+		return "{error on get giudizio (" + dipartimento + ")}";
 	}
 	
-	public String getFallbackGiudDepInd(){
-		return "{err on get giudizio (dipendenti, indicatore)}";
+	public String getFallbackGiudDepInd(String dipartimento, String indicatore){
+		return "{err on get giudizio (" + dipartimento + ", " + indicatore + ")}";
 	}
 
 }

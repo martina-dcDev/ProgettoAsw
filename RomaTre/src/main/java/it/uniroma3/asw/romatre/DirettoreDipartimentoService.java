@@ -19,8 +19,8 @@ public class DirettoreDipartimentoService {
 	}
 	
 	/* ------------ FALLBACK methods ------------ */ 
-	public String getFallbackDipartimento(){
-		return "{err on get direttore (dipartimento)}";
+	public String getFallbackDipartimento(String dipartimento){
+		return "{err on get direttore (" + dipartimento + ")}";
 	}
 
 }

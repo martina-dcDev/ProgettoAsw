@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@FeignClient("R1")
+@FeignClient("r1")
 public interface DirettoreDipartimentoClient {
 	
 	@RequestMapping(value="/R1/{dipartimento}", method=RequestMethod.GET)
