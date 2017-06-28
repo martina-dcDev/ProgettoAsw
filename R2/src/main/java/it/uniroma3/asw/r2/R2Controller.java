@@ -14,7 +14,6 @@ public class R2Controller {
 	@Autowired
 	Environment env;
 	
-
 	private final Logger logger = Logger.getLogger("it.uniroma3.asw.r2");
 
 	@RequestMapping("/R2/{dipartimento}")
