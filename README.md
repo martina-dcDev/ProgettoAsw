@@ -18,32 +18,32 @@ In particolare restituisce il nome del capo del dipartimento indicato (i nomi de
 
 In particolare il servizio principale offre due operazioni:
  
-1. **/RomaTre/&lt;dipartimento>** restituisce il nome del capo del &lt;dipartimento> e il valore medio del giudizio degli studenti riguardo a quel &lt;dipartimento>.
+1. **/romatre/&lt;dipartimento>** restituisce il nome del capo del &lt;dipartimento> e il valore medio del giudizio degli studenti riguardo a quel &lt;dipartimento>.
 
-2. **/RomaTre/&lt;dipartimento>/&lt;indicatore>** restituisce il nome del capo del &lt;dipartimento> e il valore medio dell' &lt;indicatore> relativo a quel &lt;dipartimento>.
+2. **/romatre/&lt;dipartimento>/&lt;indicatore>** restituisce il nome del capo del &lt;dipartimento> e il valore medio dell' &lt;indicatore> relativo a quel &lt;dipartimento>.
 
 Ad esempio,
 
-* la richiesta /RomaTre/ingegneria potrebbe restituire "Il direttore del dipartimento di ingegneria è Fabrizio Frati. e il valore medio del giudizio di soddisfazione degli studenti di questo dipartimento è 8/10".
+* la richiesta /romatre/ingegneria potrebbe restituire "Il direttore del dipartimento di ingegneria è Fabrizio Frati. e il valore medio del giudizio di soddisfazione degli studenti di questo dipartimento è 8/10".
 
-* la richiesta /RomaTre/ingegneria/aule potrebbe restituire "Il direttore del dipartimento di ingegneria è Giunta Gaetano e il valore medio del giudizio di soddisfazione degli studenti relativo all'indicatore "aule" di questo dipartimento è 7/10"
+* la richiesta /romatre/ingegneria/aule potrebbe restituire "Il direttore del dipartimento di ingegneria è Giunta Gaetano e il valore medio del giudizio di soddisfazione degli studenti relativo all'indicatore "aule" di questo dipartimento è 7/10"
 
 -----
 
 Il servizio RomaTre è implementato come client di due servizi secondari R1 e R2, con le caratteristiche descritte nel seguito:
 
 Il servizio R1 fornisce un’operazione:
-1. **/R1/&lt;dipartimento>** restituisce il nome del capo del &lt;dipartimento>
+1. **/r1/&lt;dipartimento>** restituisce il nome del capo del &lt;dipartimento>
 
 Ad esempio,
-* la richiesta /R1/ingegneria potrebbe restituire "Fabrizio Frati".
+* la richiesta /r1/ingegneria potrebbe restituire "Fabrizio Frati".
 
 Inoltre, il servizio R2 fornisce due operazioni:
-1. **/R2/&lt;dipartimento>** restituisce il valore medio del giudizio degli studenti riguardo a quel &lt;dipartimento>.
-2. **/R2/&lt;dipartimento>/&lt;indicatore>** restituisce il valore medio dell' &lt;indicatore> relativo a quel &lt;dipartimento>
+1. **/r2/&lt;dipartimento>** restituisce il valore medio del giudizio degli studenti riguardo a quel &lt;dipartimento>.
+2. **/r2/&lt;dipartimento>/&lt;indicatore>** restituisce il valore medio dell' &lt;indicatore> relativo a quel &lt;dipartimento>
 
 Ad esempio,
-* la richiesta /R2/ingegneria potrebbe restituire "5".
-* la richiesta /R2/ingegneria/aule potrebbe restituire "3".
+* la richiesta /r2/ingegneria potrebbe restituire "5".
+* la richiesta /r2/ingegneria/aule potrebbe restituire "3".
 
 Il servizio RomaTre risponde al suo client usufruendo dei servizi R1 e R2 e integrando le loro risposte. Per usufruire di R1 ed R2, RomaTre si avvale del servizio di service discovery offerto da Eureka presso il quale R1 ed R2 sono registrati. Inoltre viene utilizzato Zuul per fornire un punto di accesso unificato all'intera applicazione.
